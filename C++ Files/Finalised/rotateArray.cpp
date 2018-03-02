@@ -22,10 +22,10 @@ void rotate(int a[],int size, int rotateBy){
 }
 
 int main() {
-int size = 7;
-int a[size] = {1,2,3,4,5,6,7};
-int rotateBy = 4;
+    int size = 7;
+    int a[size] = {1,2,3,4,5,6,7};
+    int rotateBy = 4;
 
-rotate(a,size,rotateBy);
-return 0;
+    rotate(a,size,rotateBy);
+    return 0;
 }
