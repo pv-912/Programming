@@ -6,6 +6,14 @@ struct node{
     struct node *next;
 };
 
+void printList(node *a){
+    while(a != NULL){
+        cout<<a->data<<" ";
+        a = a -> next;
+    }
+    cout<<endl;
+}
+
 void pushHead(struct node** headRef, int newData){
 	struct node* newNode = (struct node*)malloc(sizeof(struct node));
 	newNode->data = newData;
@@ -94,12 +102,58 @@ void listLength(struct node** headRef){
 	cout<<a<<endl;
 }
 
-void printList(node *a){
-    while(a != NULL){
-        cout<<a->data<<" ";
-        a = a -> next;
-    }
-    cout<<endl;
+int listLengthRecursive(struct node* head){
+	if(head==NULL){
+		return 0;
+	}
+
+	return 1 + listLengthRecursive(head->next);
+}
+
+bool search(struct node* head,int key){
+	while(head!=NULL){
+		if(head->data==key){
+			return true;
+		}
+		head = head->next;
+	}
+
+	return false;
+}
+
+void swapNodes(struct node** head, int key1, int key2){
+	if(key1==key2){
+		return;
+	}
+	
+	struct node* temp1 = *head;
+	struct node* temp2 = *head;
+
+	while(temp1!=NULL && temp1->data!=key1){
+		temp1 = temp1->next;
+	}
+
+	while(temp2!=NULL && temp2->data!=key2){
+		temp2 = temp2->next;
+	}
+	if(temp1==NULL || temp2==NULL){
+		cout<<"given Key is not present"<<endl;
+		return;
+	}
+
+	int temp = temp1->data;
+	temp1->data = temp2->data;
+	temp2->data = temp;
+
+	printList(*head);
+}
+
+void getNodeValue(struct node** headRef, int index){
+	struct node* temp = *headRef;
+	for(int i=0; i<index; i++){
+		temp = temp->next;
+	}
+	cout<<temp->data<<endl;
 }
 
 int main() {
@@ -121,10 +175,17 @@ int main() {
 	third->next  = NULL;
 	
 	pushHead(&first, 5);
-	pushBetween(first->next, 6);
+	pushBetween(second, 6);
 	pushLast(&first,9);
+
 	listLength(&first);
+	int length = listLengthRecursive(first);
+	cout<<length<<endl;
+	getNodeValue(&first,5);
+	search(first, 3) ? cout<<"yes"<<endl : cout<<"NO"<<endl;
+	search(first, 30) ? cout<<"yes"<<endl : cout<<"NO"<<endl;
 	printList(first);
+	swapNodes(&first,1,20);
 
 	deleteNode(&first, 3);
 	printList(first);
