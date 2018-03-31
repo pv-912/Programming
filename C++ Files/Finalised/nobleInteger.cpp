@@ -10,33 +10,31 @@ If such an integer is found return 1 else return -1.
 #include <algorithm>
 using namespace std;
 
-void solve(vector<int> &a){
-    int size =(int) a.size();
-    vector<int> b;
+int solve(vector<int> &a){
+    int n =(int) a.size();
     int ifPresent = -1;
-    int count = 0;
-    int i=0,j=0;
-    while(ifPresent == -1 && i<size ){
-        while(ifPresent == -1 && j<size && a[i] < (size - j - 1) ){
-            if(a[j]>a[i]){
-                count++;
-            }
-            j++;
-        }
-        if(count == a[i]){
-            ifPresent = 1;
-        }
-        cout<<i<<" ";
-        i++;
-        count = 0; j=0;
-    }
     
-    cout<< ifPresent;
+    if(!n){
+        return ifPresent;
+    }
+    sort(a.begin(), a.end());
+    int i = 0;
+    while( i < n ){
+        while(i+1<n && a[i] == a[i+1]){
+            i++;
+        }
+        if(a[i] == (n-i-1)){
+            ifPresent = 1;
+            break;
+        }
+        i++;
+    }
+    return ifPresent;
 }
 
 int main() {
     vector<int> a;
-    a = {  -2, -7, 1, -2, -1, 6, -6, -7, -7, 3, 8, -4, -10, -6, 8, -2, -2, -1, 7};
-    solve(a);
+    a = {  3,4,5,6,7,8,9,10,11,12};
+    cout<<solve(a);
     return 0;
 }
