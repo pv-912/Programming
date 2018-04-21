@@ -1,3 +1,6 @@
+
+/* not complete yet */
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -5,6 +8,12 @@ struct ListNode{
 	int val;
 	struct ListNode* next;
 };
+
+void swap(int& a, int& b){
+	int temp = a;
+	a = b;
+	b = temp;
+}
 
 void pushLast(ListNode** head_ref, int valToInsert){
 	ListNode *newListNode = new ListNode();
@@ -24,6 +33,30 @@ void pushLast(ListNode** head_ref, int valToInsert){
 	return;
 }
 
+void deleteNode(struct ListNode** head_ref, int dataToDelete){
+	struct ListNode *position_ref = *head_ref, *prev;
+
+	if(position_ref!=NULL && position_ref->val == dataToDelete ){
+		*head_ref = position_ref->next;
+		free(position_ref);
+		return;
+	}
+
+	while(position_ref!=NULL && position_ref->val!= dataToDelete ){
+		prev = position_ref;
+		position_ref = position_ref->next;
+	}
+
+	if(position_ref == NULL){
+		cout<<"data not present";
+		return;
+	}
+
+	prev->next = position_ref->next;
+	free(position_ref);
+}
+
+
 int sizeOfLinkedList(ListNode* head_ref){
 	int size = 0;
 	ListNode *temp = head_ref;
@@ -41,19 +74,16 @@ int sizeOfLinkedList(ListNode* head_ref){
 // 	return 1+sizeOfLinkedList(head->next);
 // }
 
-
-int getCount(struct ListNode* head)
-{
-    int count = 0;  // Initialize count
-    struct ListNode* current = head;  // Initialize current
-    while (current != NULL){
-        count++;
-        current = current->next;
-    }
-    return count;
-}
-
 void reverseList(ListNode** head_ref){
+	int size = sizeOfLinkedList(*head_ref);
+	if(size == 0 || size == 1){
+		return;
+	}
+
+	int x = (*head_ref)->val;
+	deleteNode(head_ref, x);
+	reverseList(head_ref);
+	pushLast(head_ref, x);
 
 }
 
@@ -74,8 +104,6 @@ int main(){
 	// 	head = head->next;
 	// }
 	// cout<<endl;
-	cout<<sizeOfLinkedList(head)<<endl;
-	cout<<getCount(head)<<endl;
 
 	reverseList(&head);
 	while(head != NULL){
