@@ -69,6 +69,16 @@ void printLevelOrderTranversalLineByLine(binaryTree* root){
 	}
 }
 
+void reverseLevelOrder(binaryTree* root){
+	if(root == NULL){
+		return;
+	}
+	int h = height(root);
+	for(int i=h; i>=0; i--){
+		printGivenLevel(root, i);
+	}
+}
+
 int main(){
 	binaryTree* root = newNode(1);
 	root->left = newNode(2);
@@ -83,4 +93,6 @@ int main(){
 	cout<<endl;
 	printGivenLevel(root,3);
 	printLevelOrderTranversalLineByLine(root);
+	cout<<endl;
+	reverseLevelOrder(root);
 }
