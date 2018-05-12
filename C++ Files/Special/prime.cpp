@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <vector>
 using namespace std;
 
 int GCD(int A, int B) {
@@ -10,29 +11,28 @@ int GCD(int A, int B) {
             return gcd;
         }
 }
-void sieveMethod(long long N) {
-    bool isPrime[N+1];
-    for(long long i = 0; i <= N;++i) {
-        isPrime[i] = true;
+void sieveMethod(long long int N) {
+    vector<long long int> a;
+    vector<bool> isPrime;
+    for(long long int i = 0; i <= N;++i) {
+        isPrime.push_back(true);
     }
     isPrime[0] = false;
     isPrime[1] = false;
-    for(long long i = 2; i * i <= N; ++i) {
+    for(long long int i = 2; i * i <= N; ++i) {
          if(isPrime[i] == true) {
-             for(long long j = i * i; j <= N ;j += i)
+             for(long long int j = i * i; j <= N ;j += i)
                  isPrime[j] = false;
         }
     }
-
-    for (long long i = 0; i < N; ++i)
-    {
-    	if(isPrime[i]==true){
-    		cout<<i<<" ";
-    	}
+    bool x = 1;
+    for (long long int i = 0; i < N; ++i){
+        if(isPrime[i]==true){
+            cout<<i<<" ";
+        }
     }
 }
-
 int main() {
-	sieveMethod(5000000);
-	cout<<GCD(30,75);
+	sieveMethod(167774);
+	// cout<<GCD(30,75);
 }
