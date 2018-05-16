@@ -16,16 +16,6 @@ struct binarySearchTree* newNode(int data){
 	return root;
 }
 
-binarySearchTree* searchNode(binarySearchTree* root, int dataTosearch){
-	if (!root || root->data == dataTosearch)
-		return root;
-
-	if(dataTosearch < root->data)
-		return searchNode(root->left, dataTosearch);
-	if(dataTosearch > root->data)
-		return searchNode(root->right, dataTosearch);
-
-}
 
 binarySearchTree* insert(binarySearchTree* root, int data){
 	if(root==NULL){
@@ -39,7 +29,6 @@ binarySearchTree* insert(binarySearchTree* root, int data){
 
 	return root;
 }
-
 void inorder(binarySearchTree* root){
 	if(root != NULL){
 		inorder(root->left);
@@ -47,6 +36,18 @@ void inorder(binarySearchTree* root){
 		inorder(root->right);
 	}
 }
+
+binarySearchTree* searchNode(binarySearchTree* root, int dataTosearch){
+	if (!root || root->data == dataTosearch)
+		return root;
+
+	if(dataTosearch < root->data)
+		return searchNode(root->left, dataTosearch);
+	if(dataTosearch > root->data)
+		return searchNode(root->right, dataTosearch);
+
+}
+
 
 binarySearchTree* findMin(binarySearchTree* root){
 	if(root==NULL)
