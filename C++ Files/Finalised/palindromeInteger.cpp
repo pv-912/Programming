@@ -1,17 +1,4 @@
-/*
-Determine whether an integer is a palindrome. Do this without extra space.
 
-A palindrome integer is an integer x for which reverse(x) = x where reverse(x) is x with its digit reversed.
-Negative numbers are not palindromic.
-
-Example :
-
-Input : 12121
-Output : True
-
-Input : 123
-Output : False
-*/
 #include <bits/stdc++.h>
 using namespace std;
 int isPalindrome(int a) {
@@ -33,12 +20,30 @@ int isPalindrome(int a) {
    return p;
 }
 
-
+void largestPalindromeNumberOfMultiplicationOf2NDigitNumber(long long int a){
+	cout<<a<<endl;
+	for(long long int i = a*a; i>0; i--){
+		int x = i;
+		int p = 1;
+		vector<int> v;
+	    while(x>0){
+	   		v.push_back(x%10);
+	   		x = x/10;
+	    }
+	    for(int j=0; j<v.size()/2; j++){
+	   		if(v[j] != v[v.size() - j -1]){
+	   			p = 0;
+	   		}
+	    }
+	    if(p==1){
+	    	cout<<i<<endl;
+	    	break;
+	    }
+	}
+}
 int main(){
 	
-	// vector<int> c = isPalindrome(1551);
-	// for(int i=0; i<c.size(); i++){
-	// 	cout<<c[i]<<" ";
-	// }
-	cout<<isPalindrome(1523663251);
+	cout<<isPalindrome(1523663251)<<endl;
+	long long int a = 999;   // largest 3 digit number
+	largestPalindromeNumberOfMultiplicationOf2NDigitNumber(a);
 }
