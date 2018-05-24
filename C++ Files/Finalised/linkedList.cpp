@@ -1,41 +1,41 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct Node{
-	int data;
-	struct Node *next;
+struct ListNode{
+	int val;
+	struct ListNode *next;
 };
 
-void pushHead(struct Node** head_ref, int dataToInsert){
-	struct Node *newNode = new Node();
-	newNode->data = dataToInsert;
-	newNode->next = *head_ref;
-	*head_ref = newNode;
+void pushHead(struct ListNode** head_ref, int valToInsert){
+	struct ListNode *newListNode = new ListNode();
+	newListNode->val = valToInsert;
+	newListNode->next = *head_ref;
+	*head_ref = newListNode;
 }
 
-void pushLast(struct Node** head_ref, int dataToInsert){
-	struct Node *newNode = new Node();
-	newNode->data = dataToInsert;
-	newNode->next = NULL;
-	struct Node *last = *head_ref;
+void pushLast(struct ListNode** head_ref, int valToInsert){
+	struct ListNode *newListNode = new ListNode();
+	newListNode->val = valToInsert;
+	newListNode->next = NULL;
+	struct ListNode *last = *head_ref;
 
 	if(*head_ref == NULL){
-		*head_ref = newNode;
+		*head_ref = newListNode;
 		return;
 	}
 	while(last->next!=NULL){
 		last = last->next;
 	}
 
-	last->next = newNode;
+	last->next = newListNode;
 	return;
 }
 
-void pushMiddle(struct Node** head_ref, int dataToInsert, int position){
-	struct Node* newNode = new Node();
-	newNode->data = dataToInsert;
+void pushMiddle(struct ListNode** head_ref, int valToInsert, int position){
+	struct ListNode* newListNode = new ListNode();
+	newListNode->val = valToInsert;
 
-	struct Node *position_ref = *head_ref;
+	struct ListNode *position_ref = *head_ref;
 
 	if(*head_ref == NULL){
 		cout<<"list is empty";
@@ -46,26 +46,26 @@ void pushMiddle(struct Node** head_ref, int dataToInsert, int position){
 		position_ref = position_ref->next;
 	}
 
-	newNode->next = position_ref->next;
-	position_ref->next = newNode;
+	newListNode->next = position_ref->next;
+	position_ref->next = newListNode;
 }
 
-void deleteNode(struct Node** head_ref, int dataToDelete){
-	struct Node *position_ref = *head_ref, *prev;
+void deleteListNode(struct ListNode** head_ref, int valToDelete){
+	struct ListNode *position_ref = *head_ref, *prev;
 
-	if(position_ref!=NULL && position_ref->data == dataToDelete ){
+	if(position_ref!=NULL && position_ref->val == valToDelete ){
 		*head_ref = position_ref->next;
 		free(position_ref);
 		return;
 	}
 
-	while(position_ref!=NULL && position_ref->data != dataToDelete ){
+	while(position_ref!=NULL && position_ref->val != valToDelete ){
 		prev = position_ref;
 		position_ref = position_ref->next;
 	}
 
 	if(position_ref == NULL){
-		cout<<"data not present";
+		cout<<"val not present";
 		return;
 	}
 
@@ -73,40 +73,80 @@ void deleteNode(struct Node** head_ref, int dataToDelete){
 	free(position_ref);
 }
 
-void middleElement(struct Node** head_ref){
-	struct Node* one = *head_ref;
-	struct Node* two = *head_ref;
+
+
+void middleElement(struct ListNode** head_ref){
+	struct ListNode* one = *head_ref;
+	struct ListNode* two = *head_ref;
 
 	while(two != NULL){
 		one = one->next;
 		two = two->next->next;
 	}
 
-	cout<<endl<<one->data<<endl;
+	cout<<endl<<one->val<<endl;
+}
+
+void printList(struct ListNode *ListNode){
+	ListNode* temp = ListNode;
+    while(temp!=NULL){
+        cout<<temp->val<<" ";
+        temp = temp->next;
+    }
+    cout<<endl;
+}
+
+void deleteDuplicates(ListNode* A) {
+   if(!A)
+       return;
+   ListNode* prev = A;
+   ListNode* cur = A->next;
+   ListNode* temp;
+   while(cur){
+       if(cur->val == prev->val){
+       		prev->next = cur->next;
+           cur->next = NULL;
+           delete cur;
+           cur = prev->next;
+       }
+       else{
+           prev = cur;
+           cur = cur->next;
+       }
+       
+   }
+   // return A;
+   ListNode* temp1 = A;
+    while(temp1!=NULL){
+        cout<<temp1->val<<" ";
+        temp1 = temp1->next;
+    }
+    cout<<endl;
 }
 
 int main(){
-	struct Node* head = new Node();
-	struct Node* second = new Node();
-	struct Node* third = new Node();
+	struct ListNode* head = new ListNode();
+	struct ListNode* second = new ListNode();
+	struct ListNode* third = new ListNode();
 
-	head->data = 1;
+	head->val = 1;
 	head->next = second;
 
-	second->data = 2;
+	second->val = 1;
 	second->next = third;
 
-	third->data = 3;
+	third->val = 3;
 	third->next = NULL;
 
-	pushHead(&head,0);
 	pushMiddle(&head,10,2);
-	pushLast(&head,4);
-	deleteNode(&head,20);
-	middleElement(&head);	
-	while(head != NULL){
-		cout<<head->data<<" ";
-		head = head->next;
-	}
+	pushLast(&head,3);
+	pushLast(&head,3);
+	pushLast(&head,3);
+	printList(head);
+
+	deleteDuplicates(head);
+	// deleteListNode(&head,20);
+	// middleElement(&head);	
+	// printList(head);
 	return 0;
 }

@@ -15,6 +15,7 @@
 #include <iostream>
 #include <cstring>
 #include <cmath>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -28,27 +29,40 @@ using namespace std;
 // }
 
 
-int titleToNumber(string A) {
-    int x=0,y=0;
-    int size = A.length();
-    for(int i=0; i<size; i++){
-        if(i!=(size-1)){
+int titleToNumber(string s) {
+    int result = 0;
+   for (int i = 0; i < s.size(); i++) {
+        result  = result * 26 + (s[i] - 'A' + 1);
+   }
+   return result;
+}
 
-            y = int(A[i])-64;
-            x += y*pow(26,i);
-
-        } else{
-
-            y = int(A[i])-65;
-            x += y+pow(26,i);
+string convertToNumber(int a) {
+    string result;
+    string t;
+    int x;
+    while(a!=0){
+        int x = a%26;
+        if(x == 0){
+            t  = a%26 + 25  + 'A';
+            x = 1;
         }
+        else
+            t  = a%26 -1 + 'A';
+        result = result + t;
+        a = (a-x)/26;
     }
-    return x;
+    reverse(result.begin(), result.end());
+   return result;
 }
 
 int main(){
 
-    string A = "AB";
-    int a = titleToNumber(A);
-    cout<<a;
+    int a;
+    cin>>a;
+    // string a = "BCD";
+    // cout<<titleToNumber(a);
+    string b = convertToNumber(a);
+
+    cout<<b;
 }
