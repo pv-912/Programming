@@ -1,10 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
-// #define ONLINE_JUDGE  freopen("input","r",stdin); freopen("output","w",stdout);
 
 int isPalindrome(string a) {
 
-	// ONLINE_JUDGE
 	for(int i = 0; i < a.size(); ++i)
     {
         if (!((a[i] >= 'a' && a[i]<='z') || (a[i] >= 'A' && a[i]<='Z')))

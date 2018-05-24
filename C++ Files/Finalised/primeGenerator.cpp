@@ -1,4 +1,5 @@
 
+
 /*
 Peter wants to generate some prime numbers for his cryptosystem. Help him! Your task is to generate all prime numbers between two given numbers!
 Input
@@ -21,40 +22,53 @@ Output:
 5
 
 */
-#include <bits/stdc++.h>
+
+#include<iostream>
+#include<vector>
+#include <cmath>
 using namespace std;
+
+void sieveMethod(long long int m,long long int N) {
+    vector<long long int> a;
+
+    vector<bool> isPrime;
+    int sqrtM =  sqrt(m) ;
+
+    for(long long int i = 0; i <= sqrtM; ++i) {
+        isPrime.push_back(true);
+    }
+    isPrime[0] = false;
+    isPrime[1] = false;
+    for(long long int i = 2; i * i <= sqrtM; ++i) {
+         if(isPrime[i] == true) {
+             for(long long int j = i * i; j <= sqrtM ;j += i)
+                 isPrime[j] = false;
+        }
+    }
+
+
+    bool x = 1;
+    for (long long int i = m; i < N; ++i){
+        if(isPrime[i]==true){
+            cout<<i<<endl;
+        }
+    }
+}
 
 int main()
 {  
    int t=0;
-   long long int m=0,n=0;
+   long long int m,n;
    cin>>t;
    if(t>10){
       return 0;
    }
-   while(t>0){
+   while(t--){
       cin>>m>>n;
       if(( m<1 || n<1 || m> 1000000000 || n>1000000000 || (n-m)>100000 || (n-m)<0)){
          return 0;
       }
-      long long int SIZE = n;
-      bool sieve [SIZE] = {0};
-      for (long long int i = 2; i<= SIZE; i++){ 
-         for(long long int j = i*i; j <=SIZE; j+=i ){
-            sieve[j] = true;
-         }
-      }
-      if(m==1){
-         m=2;
-      }
-
-      for(long long int i = m; i<=n;i++){  
-         if(sieve[i]==0){
-            cout<<i<<endl;
-         }
-      }
-      cout<<endl;
-      t--;
+      sieveMethod( m, n+1);
    }
    return 0;
  }
