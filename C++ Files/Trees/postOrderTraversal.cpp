@@ -57,9 +57,7 @@ void postOrderTraversalUsing2Stacks(binaryTree* root){
 
 void postOrderTraversalUsing1Stacks(binaryTree* root){
 	
-	if(root == NULL){
-		return;
-	}
+	
 	binaryTree* a = root;
 	stack<binaryTree*> s;
 	s.push(root);
@@ -97,11 +95,11 @@ int main(){
 	root->right->left = newNode(6);
 	root->right->right = newNode(7);
 	root->left->left->left = newNode(8);
-	// postOrderTraversal(root);
-	// cout<<endl;
-	// postOrderTraversalUsing2Stacks(root);
-	// cout<<endl;
-	postOrderTraversalUsing1Stacks(root);
+	postOrderTraversal(root);
+	cout<<endl;
+	postOrderTraversalUsing2Stacks(root);
+	cout<<endl;
+	// postOrderTraversalUsing1Stacks(root);
 	cout<<endl;
 
 }

@@ -1,20 +1,91 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#define rep(i,n) for (i = 0; i < n; ++i)
+#define REP(i,k,n) for (i = k; i <= n; ++i)
+#define REPR(i,k,n) for (i = k; i >= n; --i)
+
+void ifOdd(int x)
+{
+   (x & 1)? printf("Odd"): printf("Even");
+}
+
+// itertion should be as
+void hello(){
+
+    vector<int> vec = {0, 1, 2, 3, 4};
+    for (const auto &value : vec)
+        cout << value << ' ';
+ 
+    cout << '\n';
+    int array[]= {1, 2, 3, 4, 5};
+    for (const auto &value: array)
+        cout << value << " ";
+}
+
+void swapWithOutUsingExtraVariale(int &x , int &y){
+      x = x + y;  // x now becomes 15
+      y = x - y;  // y becomes 10
+      x = x - y;  // x becomes 5
+
+      //  less efficient memory overflow
+      x = x * y;  // x now becomes 50
+      y = x / y;  // y becomes 10
+      x = x / y;  // x becomes 5
+}
+
 void swap(int& a, int& b){
 	int temp = a;
 	a = b;
 	b = temp;
 }
 
-int GCD(int A, int B) {
-    int m = min(A, B), gcd;
-    for(int i = m; i > 0; --i){
-        if(A % i == 0 && B % i == 0) {
-            gcd = i;
-            return gcd;
-        }
+void swap(int &x, int &y){
+        if (x == y) // Check if the two addresses are same
+      return;
+     x = x ^ y;  // x now becomes 15 (1111)
+      y = x ^ y;  // y becomes 10 (1010)
+      x = x ^ y;  // x becomes 5 (0101)
+ 
+}
+
+void sortingAnArrayInOnOfGivenNaturalNumber(vector<int> &a) {
+    vector<int> temp = a;
+    for(int i = 0; i<a.size();i++){
+        a[temp[i]] = temp[i];
     }
+}
+
+int gcd(int a, int b){
+    if (b == 0)
+        return a;
+    return gcd(b, a % b);
+}
+int gcdExtended(int a, int b, int *x, int *y)  // Euclidean extended method used for RSA public key encryption
+{
+    if (a == 0){
+        *x = 0;
+        *y = 1;
+        return b;
+    }
+ 
+    int x1, y1; // To store results of recursive call
+    int gcd = gcdExtended(b%a, a, &x1, &y1);
+    // Update x and y using results of recursive call
+    *x = y1 - (b/a) * x1;
+    *y = x1;
+ 
+    return gcd;
+}
+int randomWithInRange(int min, int max) //range : [min, max)
+{
+   static bool first = true;
+   if (first) 
+   {  
+      srand( time(NULL) ); //seeding for the first time only!
+      first = false;
+   }
+   return min + rand() % (( max + 1 ) - min);
 }
 void factorisation( long long int x){
 	vector<long long int> b;
@@ -74,17 +145,18 @@ void primeFactors(long long int n){
 		cout<<" "<<b[j];
 	}
 }
-int divisors(long long n){
+vector<int> divisors(long long n){
+    vector<int> x;
     if(n<=1){
         return 0;
     }
     int a = 0;
     for(int i=2; i<=n; i++){
         if(n%i == 0){
-            a++;
+            x.push_back(i);
         }
     }
-     return a;   
+     return x;   
 }
 bool checkPrime(long long n){
     if(n<=1){
@@ -100,6 +172,16 @@ bool checkPrime(long long n){
 }
 
 int main(){
+    std::ios_base::sync_with_stdio(false);   
+        // add this line to get fast i.o o.p  It toggles on or off the synchronization of all the C++ standard streams with their 
+        // corresponding standard C streams if it is called before the program performs its first input or output operation. Adding ios_
+        // base::sync_with_stdio (false); (which is true
+        // by default) before any I/O operation avoids this synchronization. It is a static member of function of std::ios_base.
+
+    cin.tie(NULL);
+    // tie() is a method which simply guarantees the flushing of std::cout before std::cin accepts an input. This is 
+    // useful for interactive console programs which require the console to be
+    /// updated constantly but also slows down the program for large I/O. The NULL part just returns a NULL pointer.
 	int a = 1;
 	int b = 2;
 
