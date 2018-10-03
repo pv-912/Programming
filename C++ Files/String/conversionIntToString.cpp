@@ -12,6 +12,7 @@ int main(){
 	int num;
 	stringstream ge(d);
 	ge>>num;
-	cout<<s<<" "<<typeid(s).name()<<" "<<num<<typeid(num).name()<<endl;
+	cout<<s<<" "<<typeid(s).name()<<" "<<num<<typeid(num
+		 	).name()<<endl;
 
 }

@@ -5,12 +5,12 @@
 using  namespace std; 
 int minCost(int cost[R][C], int i , int j ){
 	if(i>=R || j>= C)
-		return INT_MIN;
+		return INT_MAX;
 	else if(i == R-1 && j == C-1){
-		return cost[i][j];
-	}
+		return cost[i][j]
+;	}
 	else
-		return (min( minCost(cost, i++, j), min( minCost(cost, i, j++), minCost(cost,i++,j++) )  ) + cost[i][j]);
+		return (min( minCost(cost, i+1, j), min( minCost(cost, i, j+1), minCost(cost,i+1,j+1) )  ) + cost[i][j]);
 }
 
 int main(){
